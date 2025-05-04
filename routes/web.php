@@ -21,6 +21,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('courses/show/javascript');
     })->name('js');
 
+    Route::get('courses/show/html', function () {
+        return Inertia::render('courses/show/html');
+    })->name('html');
+
 
     Route::get('exams', function () {
         return Inertia::render('exams/index');

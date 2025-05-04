@@ -13,10 +13,10 @@ const index = () => {
 
     const courses = [
         {
-            title: 'Course 1',
-            description: 'Learn the basics of web development.',
+            title: 'Html',
+            description: 'Learn Html.',
             imageUrl: 'https://s3-cdn.cmlabs.co/page/2023/10/04/web-developer-definition-skills-and-responsibilities-908401.png',
-            url: '/courses/1',
+            url: '/courses/show/html',
         },
         {
             title: 'Javascript',
