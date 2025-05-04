@@ -30,6 +30,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('exams/index');
     })->name('exams.index');
 
+    Route::get('exams/1', function () {
+        return Inertia::render('exams/show/html-exam');
+    })->name('exams.exam1');
+    
+    Route::get('exams/2', function () {
+        return Inertia::render('exams/show/javascript-exam');
+    })->name('exams.exam2');
+
     Route::get('certificates', function () {
         return Inertia::render('certificates/index');
     })->name('certificates.index');

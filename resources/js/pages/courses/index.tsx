@@ -24,18 +24,6 @@ const index = () => {
             imageUrl: 'https://cdn.geekboots.com/geek/javascript-meta-1652702081069.jpg',
             url: '/courses/show/javascript',
         },
-        {
-            title: 'Course 3',
-            description: 'Dive deep into Laravel framework.',
-            imageUrl: 'https://cdn.hdwebsoft.com/wp-content/uploads/2021/11/Thiet-ke-chua-co-ten-4.jpg',
-            url: '/courses/3',
-        },
-        {
-            title: 'Course 4',
-            description: 'Understand database design and SQL.',
-            imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png',
-            url: '/courses/4',
-        },
     ];
 
     return (
