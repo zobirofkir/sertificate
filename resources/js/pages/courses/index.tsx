@@ -1,10 +1,9 @@
 import AppLayout from '@/layouts/app-layout'
-import { BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react'
+import { BreadcrumbItem } from '@/types'
+import { Head, Link } from '@inertiajs/react'
 import React from 'react'
 
 const index = () => {
-
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Courses',
@@ -17,21 +16,25 @@ const index = () => {
             title: 'Course 1',
             description: 'Learn the basics of web development.',
             imageUrl: 'https://s3-cdn.cmlabs.co/page/2023/10/04/web-developer-definition-skills-and-responsibilities-908401.png',
+            url: '/courses/1',
         },
         {
-            title: 'Course 2',
-            description: 'Master JavaScript and React.',
+            title: 'Javascript',
+            description: 'Master JavaScript.',
             imageUrl: 'https://cdn.geekboots.com/geek/javascript-meta-1652702081069.jpg',
+            url: '/courses/show/javascript',
         },
         {
             title: 'Course 3',
             description: 'Dive deep into Laravel framework.',
             imageUrl: 'https://cdn.hdwebsoft.com/wp-content/uploads/2021/11/Thiet-ke-chua-co-ten-4.jpg',
+            url: '/courses/3',
         },
         {
             title: 'Course 4',
             description: 'Understand database design and SQL.',
             imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png',
+            url: '/courses/4',
         },
     ];
 
@@ -58,16 +61,24 @@ const index = () => {
                                 <p className="text-gray-700 dark:text-gray-300 mt-2">
                                     {course.description}
                                 </p>
-                                <button className="mt-4 px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
-                                    Enroll Now
-                                </button>
+                                {course.url ? (
+                                    <Link href={course.url}>
+                                        <button className="mt-4 px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                            Enroll Now
+                                        </button>
+                                    </Link>
+                                ) : (
+                                    <button className="mt-4 px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>
+                                        Coming Soon
+                                    </button>
+                                )}
                             </div>
                         </div>
                     ))}
                 </div>
             </div>
         </AppLayout>
-    )
-}
+    );
+};
 
-export default index
+export default index;

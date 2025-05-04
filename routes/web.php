@@ -17,6 +17,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('courses/index');
     })->name('courses.index');
 
+    Route::get('courses/show/javascript', function () {
+        return Inertia::render('courses/show/javascript');
+    })->name('js');
+
+
     Route::get('exams', function () {
         return Inertia::render('exams/index');
     })->name('exams.index');
@@ -24,8 +29,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('certificates', function () {
         return Inertia::render('certificates/index');
     })->name('certificates.index');
-
-
 });
 
 require __DIR__.'/settings.php';
