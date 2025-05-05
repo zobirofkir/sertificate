@@ -1,5 +1,5 @@
 import AppLayout from '@/layouts/app-layout'
-import { BreadcrumbItem } from '@/types';
+import { BreadcrumbItem } from '@/types'
 import { Head } from '@inertiajs/react'
 import React from 'react'
 
@@ -19,18 +19,18 @@ const index = () => {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Exams" />
-            <div className="container mx-auto p-10">
-                <h1 className="text-3xl font-bold text-yellow-500 mb-4">Exams</h1>
-                <p className="mb-6 text-gray-700 dark:text-gray-300">List of exams related to HTML and JavaScript:</p>
+            <div className="container mx-auto p-8">
+                <h1 className="text-4xl font-semibold text-gray-900 dark:text-white mb-6">Available Exams</h1>
+                <p className="mb-8 text-lg text-gray-700 dark:text-gray-300">Choose from the following exams to test your skills:</p>
 
-                <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                     {exams.map((exam) => (
-                        <div key={exam.id} className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                            <h2 className="text-2xl font-semibold text-yellow-600 dark:text-yellow-400">{exam.title}</h2>
-                            <p className="text-gray-800 dark:text-gray-300">{exam.description}</p>
+                        <div key={exam.id} className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-xl transition-all transform hover:scale-105 hover:shadow-2xl">
+                            <h2 className="text-2xl font-semibold text-gray-900 dark:text-yellow-400">{exam.title}</h2>
+                            <p className="text-gray-700 dark:text-gray-300 mt-4">{exam.description}</p>
                             <a
                                 href={`/exams/${exam.id}`}
-                                className="text-yellow-500 hover:text-yellow-600 dark:text-yellow-400 dark:hover:text-yellow-300 mt-3 inline-block"
+                                className="mt-6 inline-block text-lg font-semibold text-white bg-amber-600 hover:bg-amber-700 rounded-md py-2 px-6 transition-colors focus:outline-none focus:ring-2 focus:ring-amber-400"
                             >
                                 Take Exam
                             </a>
