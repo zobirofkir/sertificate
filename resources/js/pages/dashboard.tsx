@@ -23,15 +23,15 @@ export default function Dashboard() {
             {
                 label: 'Certification Progress',
                 data: [65, 59, 80, 81, 56, 55],
-                borderColor: 'rgb(75, 192, 192)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgb(0, 0, 0)', // Black border for line
+                backgroundColor: 'rgba(0, 0, 0, 0.2)', // Light gray background for fill
                 fill: true,
             },
             {
                 label: 'Certification Renewals',
                 data: [28, 48, 40, 19, 86, 27],
-                borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgb(128, 128, 128)', // Gray border for line
+                backgroundColor: 'rgba(128, 128, 128, 0.2)', // Light gray background for fill
                 fill: true,
             },
         ],
@@ -44,30 +44,30 @@ export default function Dashboard() {
                 {/* Example Statistics Section */}
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                     {/* Certification Overview */}
-                    <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
-                        <div className="absolute inset-0 size-full bg-gradient-to-r from-blue-500 to-teal-500 opacity-40"></div>
+                    <div className="relative rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                        <div className="absolute inset-0 size-full bg-gradient-to-r from-black to-gray-600 opacity-40"></div>
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                        <div className="relative z-10 p-6 text-white">
+                        <div className="relative z-10 p-6 text-gray-900 dark:text-white">
                             <h2 className="text-xl font-semibold">Total Certifications</h2>
                             <p className="mt-2 text-sm">You have 120 active certifications.</p>
                         </div>
                     </div>
 
                     {/* Certification Progress */}
-                    <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
-                        <div className="absolute inset-0 size-full bg-gradient-to-r from-green-500 to-blue-500 opacity-40"></div>
+                    <div className="relative rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                        <div className="absolute inset-0 size-full bg-gradient-to-r from-gray-500 to-gray-700 opacity-40"></div>
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                        <div className="relative z-10 p-6 text-white">
+                        <div className="relative z-10 p-6 text-gray-900 dark:text-white">
                             <h2 className="text-xl font-semibold">Progress</h2>
                             <p className="mt-2 text-sm">You're 75% through the certification process.</p>
                         </div>
                     </div>
 
                     {/* Certification History */}
-                    <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
-                        <div className="absolute inset-0 size-full bg-gradient-to-r from-yellow-400 to-orange-500 opacity-40"></div>
+                    <div className="relative rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                        <div className="absolute inset-0 size-full bg-gradient-to-r from-gray-400 to-gray-600 opacity-40"></div>
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                        <div className="relative z-10 p-6 text-white">
+                        <div className="relative z-10 p-6 text-gray-900 dark:text-white">
                             <h2 className="text-xl font-semibold">Expired Certifications</h2>
                             <p className="mt-2 text-sm">5 certifications expired in the last month.</p>
                         </div>
@@ -75,8 +75,8 @@ export default function Dashboard() {
                 </div>
 
                 {/* Line Chart for Certification Statistics */}
-                <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
-                    <div className="absolute inset-0 size-full bg-gradient-to-r from-purple-600 to-pink-500 opacity-40"></div>
+                <div className="relative rounded-xl border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                    <div className="absolute inset-0 size-full bg-gradient-to-r from-gray-600 to-gray-800 opacity-40"></div>
                     <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
                     <div className="relative z-10 p-6">
                         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Certification Trends</h2>
