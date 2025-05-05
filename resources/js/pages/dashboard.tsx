@@ -2,6 +2,11 @@ import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, ArcElement } from 'chart.js';
+
+// Register ChartJS components
+ChartJS.register(Title, Tooltip, Legend, LineElement, PointElement, ArcElement, CategoryScale, LinearScale);
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -11,23 +16,75 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Dashboard() {
+    // Example chart data
+    const chartData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+        datasets: [
+            {
+                label: 'Certification Progress',
+                data: [65, 59, 80, 81, 56, 55],
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true,
+            },
+            {
+                label: 'Certification Renewals',
+                data: [28, 48, 40, 19, 86, 27],
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: true,
+            },
+        ],
+    };
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+            <div className="flex h-full flex-1 flex-col gap-6 p-6">
+                {/* Example Statistics Section */}
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {/* Certification Overview */}
+                    <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                        <div className="absolute inset-0 size-full bg-gradient-to-r from-blue-500 to-teal-500 opacity-40"></div>
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                        <div className="relative z-10 p-6 text-white">
+                            <h2 className="text-xl font-semibold">Total Certifications</h2>
+                            <p className="mt-2 text-sm">You have 120 active certifications.</p>
+                        </div>
                     </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+
+                    {/* Certification Progress */}
+                    <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                        <div className="absolute inset-0 size-full bg-gradient-to-r from-green-500 to-blue-500 opacity-40"></div>
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                        <div className="relative z-10 p-6 text-white">
+                            <h2 className="text-xl font-semibold">Progress</h2>
+                            <p className="mt-2 text-sm">You're 75% through the certification process.</p>
+                        </div>
                     </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
+
+                    {/* Certification History */}
+                    <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                        <div className="absolute inset-0 size-full bg-gradient-to-r from-yellow-400 to-orange-500 opacity-40"></div>
                         <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                        <div className="relative z-10 p-6 text-white">
+                            <h2 className="text-xl font-semibold">Expired Certifications</h2>
+                            <p className="mt-2 text-sm">5 certifications expired in the last month.</p>
+                        </div>
                     </div>
                 </div>
-                <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
+
+                {/* Line Chart for Certification Statistics */}
+                <div className="relative rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 shadow-lg overflow-hidden">
+                    <div className="absolute inset-0 size-full bg-gradient-to-r from-purple-600 to-pink-500 opacity-40"></div>
                     <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                    <div className="relative z-10 p-6">
+                        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">Certification Trends</h2>
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">See the trends in certification progress and renewals over time.</p>
+                        <div className="mt-6">
+                            <Line data={chartData} options={{ responsive: true }} />
+                        </div>
+                    </div>
                 </div>
             </div>
         </AppLayout>
