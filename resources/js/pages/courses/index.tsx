@@ -13,14 +13,14 @@ const index = () => {
 
     const courses = [
         {
-            title: 'Html',
-            description: 'Learn Html.',
+            title: 'HTML',
+            description: 'Master the basics of web development with HTML.',
             imageUrl: 'https://s3-cdn.cmlabs.co/page/2023/10/04/web-developer-definition-skills-and-responsibilities-908401.png',
             url: '/courses/show/html',
         },
         {
-            title: 'Javascript',
-            description: 'Master JavaScript.',
+            title: 'JavaScript',
+            description: 'Deep dive into JavaScript, the language of the web.',
             imageUrl: 'https://cdn.geekboots.com/geek/javascript-meta-1652702081069.jpg',
             url: '/courses/show/javascript',
         },
@@ -29,34 +29,30 @@ const index = () => {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Courses" />
-            <div className="flex flex-col gap-4 p-4">
-                <h1 className="text-2xl font-semibold">Courses</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 text-center">
+            <div className="flex flex-col gap-6 p-6">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Explore Our Courses</h1>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {courses.map((course, index) => (
                         <div
                             key={index}
-                            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all hover:shadow-2xl"
+                            className="bg-white dark:bg-gray-800 rounded-lg shadow-xl hover:shadow-2xl transition-all ease-in-out duration-300 transform hover:scale-105"
                         >
                             <img
                                 src={course.imageUrl}
                                 alt={course.title}
-                                className="w-full h-40 object-cover"
+                                className="w-full h-56 object-cover rounded-t-lg"
                             />
-                            <div className="p-4">
-                                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
-                                    {course.title}
-                                </h2>
-                                <p className="text-gray-700 dark:text-gray-300 mt-2">
-                                    {course.description}
-                                </p>
+                            <div className="p-6">
+                                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">{course.title}</h2>
+                                <p className="text-lg text-gray-600 dark:text-gray-300 mt-4">{course.description}</p>
                                 {course.url ? (
                                     <Link href={course.url}>
-                                        <button className="mt-4 px-4 py-2 bg-amber-600 text-white rounded-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-400">
+                                        <button className="mt-6 px-6 py-3 bg-amber-600 text-white font-semibold rounded-md shadow-md hover:bg-amber-700 transition-all focus:outline-none focus:ring-2 focus:ring-amber-400">
                                             Enroll Now
                                         </button>
                                     </Link>
                                 ) : (
-                                    <button className="mt-4 px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed" disabled>
+                                    <button className="mt-6 px-6 py-3 bg-gray-400 text-white font-semibold rounded-md cursor-not-allowed">
                                         Coming Soon
                                     </button>
                                 )}
