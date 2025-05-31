@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false); 
 
     return (
         <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
