@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout'
 import { BreadcrumbItem } from '@/types'
 import { Head } from '@inertiajs/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Javascript = () => {
   const breadcrumbs: BreadcrumbItem[] = [
@@ -221,7 +221,15 @@ const Javascript = () => {
   ];
     
   const [selectedCourse, setSelectedCourse] = useState<null | typeof courses[0]>(null)
-  const [completedIndex, setCompletedIndex] = useState<number>(-1) // -1 means no course done
+
+  const [completedIndex, setCompletedIndex] = useState<number>(() => {
+    const savedIndex = localStorage.getItem('javascript_completedIndex')
+    return savedIndex ? parseInt(savedIndex, 10) : -1
+  })
+
+  useEffect(() => {
+    localStorage.setItem('javascript_completedIndex', completedIndex.toString())
+  }, [completedIndex])
 
   const closeModal = () => setSelectedCourse(null)
 
