@@ -18,15 +18,35 @@ interface HtmlExamResult {
   score: number;
 }
 
+interface JavaScriptExamResult {
+  status: string;
+  score: number;
+}
 const Index = () => {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [htmlExamResult, setHtmlExamResult] = useState<HtmlExamResult | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [javascriptExamResult, setJavascriptExamResult] = useState<JavaScriptExamResult | null>(null);
 
   useEffect(() => {
     // Load user info and exam results from localStorage
     const storedUser = localStorage.getItem('userInfo');
     const storedExam = localStorage.getItem('htmlExamResult');
+    const storedJsExam = localStorage.getItem('javascriptExamResult');
+
+    if (storedJsExam) {
+      try {
+        setJavascriptExamResult(JSON.parse(storedJsExam));
+      } catch (e) {
+        console.error('Error parsing javascriptExamResult', e);
+        toast.error("Could not load JavaScript exam results");
+      }
+    } else {
+      setJavascriptExamResult({
+        status: "failed",
+        score: 4
+      });
+    }
 
     if (storedUser) {
       try {
@@ -60,9 +80,99 @@ const Index = () => {
     }
   }, []);
 
+  const handleDownloadJsCertificate = async () => {
+    setIsGenerating(true);
+    toast.info("Generating JavaScript certificate, please wait...");
+  
+    try {
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'mm',
+        format: 'a4'
+      });
+  
+      // Set background
+      pdf.setFillColor(255, 255, 255);
+      pdf.rect(0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight(), 'F');
+  
+      // Border
+      pdf.setDrawColor(0, 86, 145);
+      pdf.setLineWidth(5);
+      pdf.rect(10, 10, pdf.internal.pageSize.getWidth() - 20, pdf.internal.pageSize.getHeight() - 20);
+  
+      // Title
+      pdf.setFontSize(32);
+      pdf.setTextColor(0, 86, 145);
+      pdf.setFont('helvetica', 'bold');
+      pdf.text('Certificate of Achievement', pdf.internal.pageSize.getWidth() / 2, 40, { align: 'center' });
+  
+      // Subtitle
+      pdf.setFontSize(16);
+      pdf.setTextColor(100, 100, 100);
+      pdf.setFont('helvetica', 'italic');
+      pdf.text('This certificate is proudly presented to', pdf.internal.pageSize.getWidth() / 2, 60, { align: 'center' });
+  
+      // Name
+      if (userInfo) {
+        pdf.setFontSize(28);
+        pdf.setTextColor(0, 0, 0);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text(userInfo.name.toUpperCase(), pdf.internal.pageSize.getWidth() / 2, 80, { align: 'center' });
+      }
+  
+      // Decorative line
+      pdf.setDrawColor(0, 86, 145);
+      pdf.setLineWidth(1);
+      pdf.line(50, 90, pdf.internal.pageSize.getWidth() - 50, 90);
+  
+      // Main message
+      pdf.setFontSize(14);
+      pdf.setTextColor(70, 70, 70);
+      pdf.setFont('helvetica', 'normal');
+      pdf.text('for successfully completing the JavaScript Proficiency Examination with distinction.', 
+        pdf.internal.pageSize.getWidth() / 2, 110, { align: 'center' });
+  
+      // Exam results
+      if (javascriptExamResult) {
+        pdf.setFontSize(16);
+        pdf.setTextColor(0, 86, 145);
+        pdf.setFont('helvetica', 'bold');
+        pdf.text('Examination Results', pdf.internal.pageSize.getWidth() / 2, 130, { align: 'center' });
+  
+        pdf.setFontSize(12);
+        pdf.setTextColor(0, 0, 0);
+        pdf.setFont('helvetica', 'normal');
+        pdf.text(`Status: ${javascriptExamResult.status}`, pdf.internal.pageSize.getWidth() / 2 - 40, 145);
+        pdf.text(`Score: ${javascriptExamResult.score}/10`, pdf.internal.pageSize.getWidth() / 2 + 40, 145);
+      }
+  
+      // Footer
+      pdf.setFontSize(12);
+      pdf.setTextColor(100, 100, 100);
+      pdf.text(`Issued on: ${new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      })}`, 30, pdf.internal.pageSize.getHeight() - 30);
+  
+      pdf.text('Authorized Signature', pdf.internal.pageSize.getWidth() - 50, pdf.internal.pageSize.getHeight() - 30, { align: 'right' });
+  
+      // Save
+      pdf.save('javascript-certificate.pdf');
+      toast.success("JavaScript certificate downloaded successfully");
+    } catch (error) {
+      console.error('Error generating JavaScript certificate PDF:', error);
+      toast.error("Failed to generate JavaScript certificate");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+    
   const handleDownloadCertificate = async () => {
     setIsGenerating(true);
     toast.info("Generating certificate, please wait...");
+
+    
 
     try {
       // Create a new PDF document
@@ -71,6 +181,8 @@ const Index = () => {
         unit: 'mm',
         format: 'a4'
       });
+
+      
 
       // Set background color
       pdf.setFillColor(255, 255, 255);
@@ -171,7 +283,7 @@ const Index = () => {
         </div>
 
         <div className="flex justify-end mb-6">
-          <Button
+        <Button
             onClick={handleDownloadCertificate}
             className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white"
             disabled={isGenerating}
@@ -190,6 +302,29 @@ const Index = () => {
                   <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
                 Download Certificate
+              </>
+            )}
+          </Button>
+          
+          <Button
+            onClick={handleDownloadJsCertificate}
+            className="bg-gradient-to-r from-gray-600 to-gray-800 hover:from-gray-700 hover:to-gray-900 text-white mx-10"
+            disabled={isGenerating}
+          >
+            {isGenerating ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Generating...
+              </>
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+                Download Javascript Certificate
               </>
             )}
           </Button>
