@@ -106,13 +106,17 @@ const Index = () => {
       pdf.setFont('helvetica', 'bold');
       pdf.text('Certificate of Achievement', pdf.internal.pageSize.getWidth() / 2, 40, { align: 'center' });
   
-      // Subtitle
+      /**
+       * Subtitle
+       */
       pdf.setFontSize(16);
       pdf.setTextColor(100, 100, 100);
       pdf.setFont('helvetica', 'italic');
       pdf.text('This certificate is proudly presented to', pdf.internal.pageSize.getWidth() / 2, 60, { align: 'center' });
   
-      // Name
+      /**
+       * Name
+       */
       if (userInfo) {
         pdf.setFontSize(28);
         pdf.setTextColor(0, 0, 0);
@@ -120,19 +124,25 @@ const Index = () => {
         pdf.text(userInfo.name.toUpperCase(), pdf.internal.pageSize.getWidth() / 2, 80, { align: 'center' });
       }
   
-      // Decorative line
+      /**
+       * Decorative line
+       */
       pdf.setDrawColor(0, 86, 145);
       pdf.setLineWidth(1);
       pdf.line(50, 90, pdf.internal.pageSize.getWidth() - 50, 90);
   
-      // Main message
+      /**
+       * Main message
+       */
       pdf.setFontSize(14);
       pdf.setTextColor(70, 70, 70);
       pdf.setFont('helvetica', 'normal');
       pdf.text('for successfully completing the JavaScript Proficiency Examination with distinction.', 
         pdf.internal.pageSize.getWidth() / 2, 110, { align: 'center' });
   
-      // Exam results
+      /**
+       * Exam results
+       */
       if (javascriptExamResult) {
         pdf.setFontSize(16);
         pdf.setTextColor(0, 86, 145);
@@ -146,7 +156,9 @@ const Index = () => {
         pdf.text(`Score: ${javascriptExamResult.score}/10`, pdf.internal.pageSize.getWidth() / 2 + 40, 145);
       }
   
-      // Footer
+      /**
+       * Footer
+       */
       pdf.setFontSize(12);
       pdf.setTextColor(100, 100, 100);
       pdf.text(`Issued on: ${new Date().toLocaleDateString('en-US', {
@@ -157,7 +169,9 @@ const Index = () => {
   
       pdf.text('Authorized Signature', pdf.internal.pageSize.getWidth() - 50, pdf.internal.pageSize.getHeight() - 30, { align: 'right' });
   
-      // Save
+      /**
+       * Save
+       */
       pdf.save('javascript-certificate.pdf');
       toast.success("JavaScript certificate downloaded successfully");
     } catch (error) {
