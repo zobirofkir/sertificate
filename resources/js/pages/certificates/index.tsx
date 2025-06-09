@@ -280,7 +280,7 @@ const Index = () => {
 
   const breadcrumbs: BreadcrumbItem[] = [
       {
-          title: 'Dashboard',
+          title: 'Certificates',
           href: '/dashboard',
       },
   ];
